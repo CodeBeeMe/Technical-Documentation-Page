@@ -23,9 +23,31 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. */
 
-//Highlights the li on click and removes the highlight from all other li
 $(document).ready(() => {
-  $('.nav-list li').click(function() { 
-    $(this).addClass('active').siblings().removeClass('active');
+  let uiNavLinks = $(".nav-list li"),
+      backToTop = $("#to-top"),      
+      uiHello = $("#0");
+
+  backToTop.hide();
+
+  backToTop.click(() => {
+    uiHello
+      .addClass("active")
+      .siblings()
+      .removeClass("active");
+    $("html, body").animate({ scrollTop: 0 }, 500);
+  });
+
+  window.onscroll = () => {
+    $(window).scrollTop() || $(document).scrollTop() > 20
+      ? backToTop.show()
+    : backToTop.hide();
+  };
+
+  uiNavLinks.click(function() {
+    $(this)
+      .addClass("active")
+      .siblings()
+      .removeClass("active");
   });
 });
